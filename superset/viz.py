@@ -2655,6 +2655,35 @@ class LineBarViz(NVD3Viz):
         chart_data = self.to_series(df)
         return chart_data
 
+class TrendlineViz(NVD3Viz):
+
+    """Put emphasis on a single metric with this big number viz"""
+
+    viz_type = 'trendline'
+    verbose_name = _('Line Chart with Trendline')
+    credits = 'a <a href="https://github.com/airbnb/superset">Superset</a> original'
+    is_timeseries = True
+
+    def query_obj(self):
+        d = super(TrendlineViz, self).query_obj()
+        metric = self.form_data.get('metric')
+        if not metric:
+            raise Exception(_('Pick a metric!'))
+        d['metrics'] = [self.form_data.get('metric')]
+        self.form_data['metric'] = metric
+        return d
+
+
+    def get_data(self, df):
+        form_data = self.form_data
+        df.sort_values(by=df.columns[0], inplace=True)
+        compare_lag = form_data.get('compare_lag')
+        '''df.index = df.index.map(str)'''
+        print (df)
+        return {
+            'data': df.to_dict (orient='records'),
+             }       
+
 
 viz_types = {
     o.viz_type: o for o in globals().values()

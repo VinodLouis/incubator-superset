@@ -53,6 +53,7 @@ export const VIZ_TYPES = {
   deck_arc: 'deck_arc',
   deck_polygon: 'deck_polygon',
   rose: 'rose',
+  trendline:'trendline',
 };
 
 const vizMap = {
@@ -105,5 +106,6 @@ const vizMap = {
   [VIZ_TYPES.deck_polygon]: require('./deckgl/layers/polygon.jsx').default,
   [VIZ_TYPES.deck_multi]: require('./deckgl/multi.jsx'),
   [VIZ_TYPES.rose]: require('./rose.js'),
+  [VIZ_TYPES.trendline]: require('./trendline.js'),
 };
 export default vizMap;
