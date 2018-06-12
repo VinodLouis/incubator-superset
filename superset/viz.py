@@ -2661,7 +2661,7 @@ class TrendlineViz(NVD3Viz):
 
     viz_type = 'trendline'
     verbose_name = _('Line Chart with Trendline')
-    credits = 'a <a href="https://github.com/airbnb/superset">Superset</a> original'
+    credits = 'a <a href="http://bl.ocks.org/benvandyke/8459843">benvandyke</a> original'
     is_timeseries = True
 
     def query_obj(self):
@@ -2673,16 +2673,12 @@ class TrendlineViz(NVD3Viz):
         self.form_data['metric'] = metric
         return d
 
-
     def get_data(self, df):
         form_data = self.form_data
         df.sort_values(by=df.columns[0], inplace=True)
-        compare_lag = form_data.get('compare_lag')
-        '''df.index = df.index.map(str)'''
-        print (df)
         return {
             'data': df.to_dict (orient='records'),
-             }       
+        }       
 
 
 viz_types = {
